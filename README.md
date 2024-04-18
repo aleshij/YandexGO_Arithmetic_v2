@@ -1,1 +1,0 @@
-# YandexGO_Arithmetic_v2
