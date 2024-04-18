@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option go_package = "/";
+
+import "google/protobuf/timestamp.proto";
+
+package agent;
+
+message Agent {
+  string id = 1;
+  bool active = 2;
+  google.protobuf.Timestamp last_seen = 3;
+}
+
+service AgentService {
+  rpc Connect(ConnectRequest) returns (ConnectResponse);
+  rpc GetAgents(GetAgentsRequest) returns (stream Agent);
+  // Обновления статуса агента
+  rpc UpdateAgentStatus(UpdateAgentStatusRequest) returns (UpdateAgentStatusResponse);
+
+}
+
+message ConnectRequest {
+  string id = 1;
+}
+
+message ConnectResponse {}
+
+message GetAgentsRequest {}
+
+message AgentStreamResponse {
+  repeated Agent agents = 1;
+}
+
+message UpdateAgentStatusRequest {
+  string id = 1;
+  bool active = 2;
+}
+
+message UpdateAgentStatusResponse {}
+
+
+
+
